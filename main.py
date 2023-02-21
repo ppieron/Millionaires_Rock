@@ -1,11 +1,14 @@
 import random, time
+from Lifelines import fiftyfifty, phone_a_friend, ask_audience, lifeline_choice
 
 questions_level1 = ['Who is a frontman of a legendary rock band - The Rolling Stones:',
                     'Slash is a famous:',
                     'Curt Cobain was a frontman of:',
                     '"Highway to Hell" is a signature song of:',
                     'Which rock band has a lighting sign in its logo:',
-                    'The Beatles were an rock band from:'
+                    'The Beatles were an rock band from:',
+                    'From artists listed below, who was not a singer:',
+                    'Which rock band is famous for a song "We Will Rock You:"'
                     ]
 
 answers_level1 = [['A. Bon Scott', 'B. Mick Jagger', 'C. Axl Rose', 'D. Ozzy Osbourne'],
@@ -13,10 +16,13 @@ answers_level1 = [['A. Bon Scott', 'B. Mick Jagger', 'C. Axl Rose', 'D. Ozzy Osb
                   ['A. Nirvana', 'B. Aerosmith', 'C. Black Sabbath', 'D. ACDC'],
                   ['A. Guns n Roses', 'B. Marylin Mason', 'C. ACDC', 'D. The Rolling Stones'],
                   ['A. ACDC', 'B. The Offspring', 'C. Disturbed', 'D. Korn'],
-                  ['A. USA', 'B. France', 'C. Scotland', 'D. England']
+                  ['A. USA', 'B. France', 'C. Scotland', 'D. England'],
+                  ['A. Freddie Mercury', 'B. Lenny Kravitz', 'C. Mick Jagger', 'D. Brian May'],
+                  ['A. Queen', 'B. Behemoth', 'C. Red Hot Chilli Peppers', 'D. The Beatles']
                   ]
 
-correct_answers_level1 = ["B. Mick Jagger", "C. Guitarist", "A. Nirvana", "C. ACDC", "A. ACDC", "D. England"]
+correct_answers_level1 = ["B. Mick Jagger", "C. Guitarist", "A. Nirvana", "C. ACDC", "A. ACDC", "D. England",
+                          'D. Brian May', 'A. Queen']
 
 questions_level2 = ["What's the name of the latest album of ACDC:",
                     'Ozzy Osbourne is not an author of:',
@@ -43,7 +49,8 @@ answers_level2 = [['A. Back in Black', "B. Power Up", 'C. Highway to Hell', 'D. 
                   ]
 
 correct_answers_level2 = ["B. Power Up", 'C. T.N.T.', 'A. Jonathan Davis', 'D. Tainted Love', 'C. I Want to Break Free',
-                          'D. Aerosmith', 'C. November Rain', 'B. Red Hot Chilli Peppers', 'D. Metallica', 'A. Bruce Dickinson']
+                          'D. Aerosmith', 'C. November Rain', 'B. Red Hot Chilli Peppers', 'D. Metallica',
+                          'A. Bruce Dickinson']
 
 questions_level3 = ["Who was a vocalist on ACDC's album 'Back in Black': ",
                     'Who was the first lead vocalist of Nightwish:',
@@ -71,7 +78,8 @@ answers_level3 = [['A. Bon Scott', 'B. Brian Johnson', 'C. Axl Rose', 'D. Peter 
                   ]
 
 correct_answers_level3 = ['B. Brian Johnson', 'C. Tarja Turunen', 'A. Randy Rhoads', 'B. Snow White',
-                          'B. Callifornication', 'C. Freak On a Leash', 'D. ACDC', 'C. Disturbed', 'A. The grass is green and the girls are pretty.', 'B. Led Zeppelin']
+                          'B. Callifornication', 'C. Freak On a Leash', 'D. ACDC', 'C. Disturbed',
+                          'A. The grass is green and the girls are pretty.', 'B. Led Zeppelin']
 
 Lifelines = ['50:50', 'Phone a friend', 'Ask Audience']
 
@@ -85,161 +93,6 @@ def draw_question(lst):
 def print_question_nr(x):
     print("-" * 57 + "\n" + " " * (
             20 - (len(str(prizes[x - 1])))) + f"QUESTION No {x} - ${prizes[x - 1]:,}" + "\n" + "-" * 57)
-
-
-def fiftyfifty(alst, calst, i):
-    ranswr = calst[i]
-    ranswr_idx = alst[i].index(ranswr)
-    answr_choice_idx = random.randint(0, 3)
-    if answr_choice_idx == ranswr_idx:
-        return fiftyfifty(alst, calst, i)
-    else:
-        if answr_choice_idx < ranswr_idx:
-            print(
-                f"\nHere are the answers:\n\t{alst[i][answr_choice_idx]}\n\t{alst[i][ranswr_idx]}"
-            )
-            blst = [alst[i][ranswr_idx], alst[i][answr_choice_idx]]
-            alst[i].clear()
-            alst[i].append(blst[1])
-            alst[i].append(blst[0])
-        else:
-            print(
-                f"\nHere are the answers:\n\t{alst[i][ranswr_idx]}\n\t{alst[i][answr_choice_idx]}"
-            )
-            blst = [alst[i][ranswr_idx], alst[i][answr_choice_idx]]
-            alst[i].clear()
-            alst[i].append(blst[0])
-            alst[i].append(blst[1])
-
-
-def phone_a_friend(alst, calst, i, lvl):
-    frnd_answer = []
-    ranswr = calst[i]
-    ranswr_idx = alst[i].index(ranswr)
-    if len(alst[i]) == 2:
-        for _ in range(5 - lvl):
-            frnd_answer.append(ranswr_idx)
-        r_choice = random.randint(0, 1)
-        frnd_answer.append(r_choice)
-        frnd_choice = random.choice(frnd_answer)
-        print(f"\nYour friend says it's: {alst[i][frnd_choice]}")
-    else:
-        for _ in range(4 - lvl):
-            frnd_answer.append(ranswr_idx)
-        r_choice = random.randint(0, 3)
-        frnd_answer.append(r_choice)
-        frnd_choice = random.choice(frnd_answer)
-        print(f"\nYour friend says it's: {alst[i][frnd_choice]}")
-
-
-def ask_audience(alst, calst, i, lvl):
-    ranswr = calst[i]  # B
-    ranswr_idx = alst[i].index(ranswr)
-
-    if len(alst[i]) == 4:
-        if lvl == 1:
-            ranswr_prcnt = round((random.uniform(0.45, 1)), 2)
-
-        elif lvl == 2:
-            ranswr_prcnt = round((random.uniform(0.4, 0.7)), 2)
-
-        else:
-            ranswr_prcnt = round((random.uniform(0.3, 0.6)), 2)
-
-        wanswr1 = round(random.uniform(0, (1 - ranswr_prcnt)), 2)
-        wanswr2 = round(random.uniform(0, (1 - ranswr_prcnt - wanswr1)), 2)
-        if wanswr2 < 0:
-            wanswr2 = 0
-        wanswr3 = round((1 - ranswr_prcnt - wanswr1 - wanswr2), 2)
-        if wanswr3 < 0:
-            wanswr3 = 0
-
-        wanswr_lst = [wanswr1, wanswr2, wanswr3]
-
-        print("\nThe Audience poll results:")
-
-        if ranswr_idx == 0:
-            print(f'\t{alst[i][ranswr_idx]} - {ranswr_prcnt:.0%}')
-            wachoice = random.randint(0, 2)
-            print(f'\t{alst[i][1]} - {wanswr_lst[wachoice]:.0%}')
-            wanswr_lst.pop(wachoice)
-            wachoice = random.randint(0, 1)
-            print(f'\t{alst[i][2]} - {wanswr_lst[wachoice]:.0%}')
-            wanswr_lst.pop(wachoice)
-            print(f'\t{alst[i][3]} - {wanswr_lst[0]:.0%}')
-
-        elif ranswr_idx == 1:
-            wachoice = random.randint(0, 2)
-            print(f'\t{alst[i][0]} - {wanswr_lst[wachoice]:.0%}')
-            wanswr_lst.pop(wachoice)
-            print(f'\t{alst[i][ranswr_idx]} - {ranswr_prcnt:.0%}')
-            wachoice = random.randint(0, 1)
-            print(f'\t{alst[i][2]} - {wanswr_lst[wachoice]:.0%}')
-            wanswr_lst.pop(wachoice)
-            print(f'\t{alst[i][3]} - {wanswr_lst[0]:.0%}')
-
-        elif ranswr_idx == 2:
-            wachoice = random.randint(0, 2)
-            print(f'\t{alst[i][0]} - {wanswr_lst[wachoice]:.0%}')
-            wanswr_lst.pop(wachoice)
-            wachoice = random.randint(0, 1)
-            print(f'\t{alst[i][1]} - {wanswr_lst[wachoice]:.0%}')
-            wanswr_lst.pop(wachoice)
-            print(f'\t{alst[i][ranswr_idx]} - {ranswr_prcnt:.0%}')
-            print(f'\t{alst[i][3]} - {wanswr_lst[0]:.0%}')
-
-        else:
-            wachoice = random.randint(0, 2)
-            print(f'\t{alst[i][0]} - {wanswr_lst[wachoice]:.0%}')
-            wanswr_lst.pop(wachoice)
-            wachoice = random.randint(0, 1)
-            print(f'\t{alst[i][1]} - {wanswr_lst[wachoice]:.0%}')
-            wanswr_lst.pop(wachoice)
-            print(f'\t{alst[i][2]} - {wanswr_lst[0]:.0%}')
-            print(f'\t{alst[i][ranswr_idx]} - {ranswr_prcnt:.0%}')
-
-    else:
-        if lvl == 1:
-            ranswr_prcnt = round((random.uniform(0.45, 1)), 2)
-
-        elif lvl == 2:
-            ranswr_prcnt = round((random.uniform(0.4, 0.7)), 2)
-
-        else:
-            ranswr_prcnt = round((random.uniform(0.3, 0.6)), 2)
-
-        wanswr = round(1 - ranswr_prcnt, 2)
-
-        print("\nThe Audience poll results:")
-
-        if ranswr_idx == 0:
-            print(f'\t{alst[i][0]} - {ranswr_prcnt:.0%}')
-            print(f'\t{alst[i][1]} - {wanswr:.0%}')
-
-        elif ranswr_idx == 1:
-            print(f'\t{alst[i][0]} - {wanswr:.0%}')
-            print(f'\t{alst[i][1]} - {ranswr_prcnt:.0%}')
-
-
-def lifeline_choice(lflst):
-    decision = input("\nWould you like to use a Lifeline? (Y/N): ").upper().strip()
-    if decision[0] == 'Y':
-        print("\nYour available Lifelines:")
-        for i in lflst:
-            print(i, end=", ")
-        lfchoice = input(f"\n\nWhich one do you choose? ").upper().strip()
-        if lfchoice[0] == '5':
-            print(f'Your choice is: "50:50"')
-            return '50:50'
-        elif lfchoice[0] == 'P':
-            print(f'Your choice is: "Phone a friend"')
-            return 'Phone a friend'
-        elif lfchoice[0] == 'A':
-            print(f'Your choice is: "Ask Audience:')
-            return 'Ask Audience'
-
-    else:
-        return False
 
 
 def get_answer():
@@ -304,13 +157,15 @@ def main(lvl, no_of_questions, lvl_start_qnumber):
         if question_number > 1:
             time.sleep(0.5)
             while True:
-                player_decision = input(f"\nWould you like to play further or come back home with:\n${prizes[question_number - 2]:,}"
-                                        f"\n\nWhat's your decision? Continue or Give Up?: ").upper().strip()
+                player_decision = input(
+                    f"\nWould you like to play further or come back home with:\n${prizes[question_number - 2]:,}"
+                    f"\n\nWhat's your decision? Continue or Give Up?: ").upper().strip()
                 if player_decision[0] == 'C':
                     break
                 elif player_decision[0] == 'G':
                     print("\n" + "=" * 57 + "\n" +
-                          ' ' * (28 - int(len(f'Congratulations! You have won: ${prizes[(question_number - 2)]}') * 0.5)) +
+                          ' ' * (28 - int(
+                        len(f'Congratulations! You have won: ${prizes[(question_number - 2)]}') * 0.5)) +
                           f"\x1b[6;10;42mCongratulations! You have won: ${prizes[question_number - 2]:,}\x1b[0m" + "\n" + "=" * 57)
                     return x == 1,
 
@@ -320,23 +175,25 @@ def main(lvl, no_of_questions, lvl_start_qnumber):
         if x == 1:
             break
 
-
         player_answer = get_answer()
         if player_answer == correct_answers[i][0]:
             if question_number < 12:
                 print(f"{player_answer} is a right answer! You have ${prizes[question_number - 1]:,}\n")
             else:
-                print("\n" + "*" * 57 + "\n" + " " * 8 + f"\x1b[6;10;42mCONGRATULATIONS! You have won $1,000,000!\x1b[0m\n" + "*" * 57)
+                print(
+                    "\n" + "*" * 57 + "\n" + " " * 8 + f"\x1b[6;10;42mCONGRATULATIONS! You have won $1,000,000!\x1b[0m\n" + "*" * 57)
         else:
             if question_number == 1:
                 print(f"{player_answer} is a wrong answer." +
                       f"\nCorrect answer: {correct_answers[i]}" + "\n" + "=" * 57 + "\n" +
-                      ' ' * (28 - int(len('You have won: $0') * 0.5)) + "\x1b[6;10;41mYou have won: $0\x1b[0m" + "\n" + "=" * 57)
+                      ' ' * (28 - int(
+                    len('You have won: $0') * 0.5)) + "\x1b[6;10;41mYou have won: $0\x1b[0m" + "\n" + "=" * 57)
 
             elif 1 <= question_number < 7:
                 print(f"{player_answer} is a wrong answer." +
                       f"\nCorrect answer: {correct_answers[i]}" + "\n" + "=" * 57 + "\n" +
-                      ' ' * (28 - int(len('You have won: $1,000') * 0.5)) + "\x1b[6;10;44mYou have won: $1,000\x1b[0m" + "\n" + "=" * 57)
+                      ' ' * (28 - int(
+                    len('You have won: $1,000') * 0.5)) + "\x1b[6;10;44mYou have won: $1,000\x1b[0m" + "\n" + "=" * 57)
 
             elif 7 <= question_number < 12:
                 print(f"{player_answer} is a wrong answer." +
@@ -355,13 +212,13 @@ def main(lvl, no_of_questions, lvl_start_qnumber):
     return 1
 
 
-print("=" * 55 + "\n" + " " * 8 + f"|m|. WLECOME TO ROCK MILLIONAIRES .|m|" +
+print("=" * 55 + "\n" + " " * 4 + f"|m|. WELCOME TO THE ROCK MILLIONAIRES .|m|" +
       "\n\n"
       " You will now see 12 questions checking your knowledge"
       "\n about rock music. Each question brings you closer to:"
       "\n               WINNING 1,000,000 USD!\n")
 
-time.sleep(2)
+time.sleep(4)
 print("-" * 55 +
       "\nBelow you will find values of the questions:\n")
 
@@ -377,12 +234,16 @@ for prize in prizes:
     n += 1
 
 time.sleep(0.5)
-print('\nMilestones are capped amounts of your final prize\n'
-      'You have 3 Lifelines:\n'
-      '\t50:50\n\tPhone a friend\n\tAsk Audience\n'
-      "\n>>>>>> OOOOOOOOOKEEEEEY! SO LET'S ROOOOOOOOOCK!!! <<<<<<")
+print('\nMilestones are capped amounts of your final prize\n')
+time.sleep(2)
+print('You have 3 Lifelines:')
+for Lifeline in Lifelines:
+    print(Lifeline, end=", ")
+    time.sleep(0.5)
+time.sleep(2)
+print("\n\n>>>>>> OOOOOOOOOKEEEEEY! SO LET'S ROOOOOOOOOCK!!! <<<<<<\n")
 
-time.sleep(1)
+time.sleep(5)
 
 x = main(1, 2, 1)
 if x == 1:

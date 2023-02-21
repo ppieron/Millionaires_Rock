@@ -1,1 +1,0 @@
-print(f"\x1b[6;10;42mCONGRATULATIONS! You have won $1,000,000!\x1b[0m")
