@@ -72,7 +72,7 @@ answers_level3 = [['A. Bon Scott', 'B. Brian Johnson', 'C. Axl Rose', 'D. Peter 
                   ['A. Falling Away from Me', 'B. Coming Undone', 'C. Freak On a Leash', 'D. Here to Stay'],
                   ['A. The Rolling Stones', 'B. Iron Maiden', 'C. Aerosmith', 'D. ACDC'],
                   ['A. Marylin Manson', 'B. Guns n Roses', 'C. Disturbed', 'D. Motorhead'],
-                  ['A. The grass is green and the girls are pretty.', "B. The love is free and the life's not shitty.",
+                  ['A. The grass is green and the girls are pretty.', "B. The love is free and the life ain't shitty.",
                    "C. The sky is blue and and girls are pretty.", 'D. The drugs are free and they make us witty'],
                   ['A. Guns n Roses', 'B. Led Zeppelin', 'C. Deep Purple', 'D. Pink FLoyd'],
                   ]
