@@ -159,7 +159,7 @@ def main(lvl, no_of_questions, lvl_start_qnumber):
             while True:
                 player_decision = input(
                     f"\nWould you like to play further or come back home with:\n${prizes[question_number - 2]:,}"
-                    f"\n\nWhat's your decision? Continue or Give Up?: ").upper().strip()
+                    f"\n\nWhat's your decision? Continue or Give Up? (C/G): ").upper().strip()
                 if player_decision[0] == 'C':
                     break
                 elif player_decision[0] == 'G':
