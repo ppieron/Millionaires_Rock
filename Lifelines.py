@@ -37,14 +37,21 @@ def phone_a_friend(alst, calst, i, lvl):
         r_choice = random.randint(0, 1)
         frnd_answer.append(r_choice)
         frnd_choice = random.choice(frnd_answer)
-        print(f"\nYour friend says it's: {alst[i][frnd_choice]}")
+        if frnd_choice == ranswr_idx:
+            print(f"\nYour friend says it's: {alst[i][frnd_choice]}")
+        else:
+            print("\nYour friend says: I don't know")
+
     else:
         for _ in range(4 - lvl):
             frnd_answer.append(ranswr_idx)
         r_choice = random.randint(0, 3)
         frnd_answer.append(r_choice)
         frnd_choice = random.choice(frnd_answer)
-        print(f"\nYour friend says it's: {alst[i][frnd_choice]}")
+        if frnd_choice == ranswr_idx:
+            print(f"\nYour friend says it's: {alst[i][frnd_choice]}")
+        else:
+            print("\nYour friend says: I don't know")
 
 
 def ask_audience(alst, calst, i, lvl):
