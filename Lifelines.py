@@ -146,7 +146,10 @@ def ask_audience(alst, calst, i, lvl):
 
 def lifeline_choice(lflst):
     decision = input("\nWould you like to use a Lifeline? (Y/N): ").upper().strip()
-    if decision[0] == 'Y':
+    if decision == "":
+        return False
+
+    elif decision[0] == 'Y':
         print("\nYour available Lifelines:")
         for i in lflst:
             print(i, end=", ")

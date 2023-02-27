@@ -11,7 +11,7 @@ answers_level2 = Questions.answers_level2
 correct_answers_level2 = Questions.correct_answers_level2
 
 questions_level3 = Questions.questions_level3
-answers_level3 = Questions.questions_level2
+answers_level3 = Questions.answers_level3
 correct_answers_level3 = Questions.correct_answers_level3
 
 Lifelines = ['50:50', 'Phone a friend', 'Ask Audience']
@@ -67,7 +67,7 @@ def main(lvl, no_of_questions, lvl_start_qnumber):
         for j in range(len(answers[i])):
             time.sleep(0.3)
             print(f"\t{answers[i][j]}")
-        if Lifelines == []:
+        if not Lifelines:
             print("\nYou have no more Liflines available!")
         for LifeLine in range(len(Lifelines)):
             if Lifelines:
